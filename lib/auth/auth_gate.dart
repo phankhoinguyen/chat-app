@@ -13,12 +13,12 @@ class AuthGate extends ConsumerWidget {
     return authState.when(
       data: (user) {
         if (user != null) {
-          return HomePage();
+          return const HomePage();
         }
-        return LoginPage();
+        return const LoginPage();
       },
       error: (e, stackTrace) => Text('Lỗi: $e'),
-      loading: () => CircularProgressIndicator(),
+      loading: () => const CircularProgressIndicator(),
     );
   }
 }

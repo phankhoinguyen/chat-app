@@ -13,7 +13,7 @@ void main() async {
         DefaultFirebaseOptions
             .currentPlatform, // Dùng cấu hình Firebase theo từng nền tảng (Android/iOS)
   );
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: lightMode,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: AuthGate()),
+      home: const Scaffold(body: AuthGate()),
     );
   }
 }

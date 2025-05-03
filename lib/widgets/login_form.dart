@@ -39,8 +39,8 @@ class _LoginFormState extends State<LoginForm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.waze, size: 60),
-            SizedBox(height: 50),
+            const FaIcon(FontAwesomeIcons.waze, size: 60),
+            const SizedBox(height: 50),
             Form(
               key: _formKey,
               child: Padding(
@@ -48,7 +48,10 @@ class _LoginFormState extends State<LoginForm> {
                 child: Column(
                   children: [
                     if (_eMessage != null)
-                      Text(_eMessage!, style: TextStyle(color: Colors.red)),
+                      Text(
+                        _eMessage!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
                     MyTextFormField(
                       inputText: 'Số di động hoặc email',
                       isPassword: false,
@@ -64,7 +67,7 @@ class _LoginFormState extends State<LoginForm> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     MyTextFormField(
                       inputText: 'Mật khẩu',
                       isPassword: true,
@@ -76,9 +79,9 @@ class _LoginFormState extends State<LoginForm> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     AuthButton(inputText: 'Đăng nhập', onTap: logIn),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -90,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                             color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
-                        SizedBox(width: 3),
+                        const SizedBox(width: 3),
                         GestureDetector(
                           onTap: widget.switchPage,
                           child: Text(

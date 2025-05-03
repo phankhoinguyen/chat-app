@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:leo_app/auth/auth_services.dart';
+import 'package:leo_app/widgets/drawer_home.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  void logOut() {
-    final _auth = AuthServices();
-    _auth.signOut();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        actions: [IconButton(onPressed: logOut, icon: Icon(Icons.logout))],
-      ),
+      appBar: AppBar(centerTitle: true, title: const Text('Messenger')),
+      drawer: const DrawerHome(),
     );
   }
 }

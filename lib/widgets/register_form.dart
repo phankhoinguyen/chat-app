@@ -40,8 +40,8 @@ class _RegisterFormState extends State<RegisterForm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.waze, size: 60),
-            SizedBox(height: 50),
+            const FaIcon(FontAwesomeIcons.waze, size: 60),
+            const SizedBox(height: 50),
             Form(
               key: _formKey,
               child: Padding(
@@ -64,7 +64,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     MyTextFormField(
                       inputText: 'Mật khẩu',
                       isPassword: true,
@@ -76,7 +76,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     MyTextFormField(
                       inputText: 'Nhập lại mật khẩu',
                       isPassword: true,
@@ -91,9 +91,9 @@ class _RegisterFormState extends State<RegisterForm> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     AuthButton(inputText: 'Đăng ký', onTap: signUp),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -105,7 +105,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
-                        SizedBox(width: 3),
+                        const SizedBox(width: 3),
                         GestureDetector(
                           onTap: widget.switchPage,
                           child: Text(
