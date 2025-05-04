@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leo_app/auth/auth_gate.dart';
+import 'package:leo_app/widgets/home_page_widgets/auth_gate.dart';
 import 'package:leo_app/firebase_options.dart';
 import 'package:leo_app/themes/light_mode.dart';
 

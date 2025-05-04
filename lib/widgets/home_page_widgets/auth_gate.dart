@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leo_app/auth/auth_provider.dart';
+import 'package:leo_app/services/auth/auth_provider.dart';
 import 'package:leo_app/pages/home_page.dart';
-import 'package:leo_app/pages/login_page.dart';
+import 'package:leo_app/pages/login_or_register_page.dart';
 
 class AuthGate extends ConsumerWidget {
   const AuthGate({super.key});
@@ -15,7 +15,7 @@ class AuthGate extends ConsumerWidget {
         if (user != null) {
           return const HomePage();
         }
-        return const LoginPage();
+        return const LoginOrRegisterPage();
       },
       error: (e, stackTrace) => Text('Lỗi: $e'),
       loading: () => const CircularProgressIndicator(),

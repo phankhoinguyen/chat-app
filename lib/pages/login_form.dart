@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:leo_app/auth/auth_services.dart';
-import 'package:leo_app/widgets/auth_button.dart';
-import 'package:leo_app/widgets/my_text_form_field.dart';
+import 'package:leo_app/services/auth/auth_services.dart';
+import 'package:leo_app/widgets/login_page_widgets/auth_button.dart';
+import 'package:leo_app/widgets/login_page_widgets/my_text_form_field.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key, required this.switchPage});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key, required this.switchPage});
   final void Function() switchPage;
 
   @override
-  State<RegisterForm> createState() => _RegisterFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
-  final _auth = AuthServices();
+class _LoginFormState extends State<LoginForm> {
   String? _eMessage;
-  void signUp() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await _auth.signUp(_email.text, _password.text);
-      } catch (e) {
-        setState(() {
-          _eMessage = 'Đăng ký không thành công, hãy thử lại sau! $e';
-        });
+  final _auth = AuthServices();
+  void logIn() async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        await _auth.signIn(_email.text, _password.text);
       }
+    } catch (e) {
+      setState(() {
+        _eMessage = 'Đăng nhập không thành công: ${e.toString()}';
+      });
     }
   }
 
-  final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  final _confirmPassword = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +47,11 @@ class _RegisterFormState extends State<RegisterForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   children: [
-                    if (_eMessage != null) Text(_eMessage!),
+                    if (_eMessage != null)
+                      Text(
+                        _eMessage!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
                     MyTextFormField(
                       inputText: 'Số di động hoặc email',
                       isPassword: false,
@@ -76,29 +79,14 @@ class _RegisterFormState extends State<RegisterForm> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 8),
-                    MyTextFormField(
-                      inputText: 'Nhập lại mật khẩu',
-                      isPassword: true,
-                      controller: _confirmPassword,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Vui lòng xác nhận mật khẩu';
-                        }
-                        if (value != _password.text) {
-                          return 'Vui lòng nhập đúng mật khẩu';
-                        }
-                        return null;
-                      },
-                    ),
                     const SizedBox(height: 15),
-                    AuthButton(inputText: 'Đăng ký', onTap: signUp),
+                    AuthButton(inputText: 'Đăng nhập', onTap: logIn),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Đã có tài khoản?',
+                          'Chưa có tài khoản sao?',
                           style: Theme.of(
                             context,
                           ).textTheme.bodyLarge!.copyWith(
@@ -109,7 +97,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         GestureDetector(
                           onTap: widget.switchPage,
                           child: Text(
-                            'Đăng nhập tài khoản',
+                            'Đăng ký liền tay',
                             style: Theme.of(
                               context,
                             ).textTheme.bodyLarge!.copyWith(

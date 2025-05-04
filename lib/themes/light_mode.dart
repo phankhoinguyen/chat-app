@@ -17,6 +17,7 @@ final colorScheme = ColorScheme.fromSeed(
   error: Colors.red, // Mặc định
 );
 final lightMode = ThemeData.light().copyWith(
+  dividerTheme: DividerThemeData(color: colorScheme.background),
   scaffoldBackgroundColor: colorScheme.surface,
   appBarTheme: AppBarTheme(
     backgroundColor: colorScheme.surface,

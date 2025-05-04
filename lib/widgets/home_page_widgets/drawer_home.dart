@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:leo_app/auth/auth_services.dart';
+import 'package:leo_app/services/auth/auth_services.dart';
 import 'package:leo_app/pages/setting_page.dart';
 
 class DrawerHome extends StatelessWidget {
-  const DrawerHome({super.key});
+  const DrawerHome({super.key, required this.userName, this.profileImage});
+
+  final String userName;
+  final File? profileImage;
 
   void logOut() {
     final _auth = AuthServices();
@@ -15,6 +20,7 @@ class DrawerHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
+
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -22,13 +28,34 @@ class DrawerHome extends StatelessWidget {
             children: [
               DrawerHeader(
                 child: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.signalMessenger,
-                    size: 40,
-                    color: Theme.of(context).colorScheme.primary,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      profileImage == null
+                          ? FaIcon(
+                            FontAwesomeIcons.userTie,
+                            size: 40,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                          : CircleAvatar(
+                            radius: 30,
+                            backgroundImage: FileImage(profileImage!),
+                          ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Khôi Nguyên',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium!.copyWith(
+                          fontFamily: 'Cedora',
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: ListTile(

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:leo_app/widgets/login_form.dart';
-import 'package:leo_app/widgets/register_form.dart';
+import 'package:leo_app/pages/login_form.dart';
+import 'package:leo_app/pages/register_form.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginOrRegisterPage extends StatefulWidget {
+  const LoginOrRegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginOrRegisterPage> createState() => _LoginOrRegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginOrRegisterPageState extends State<LoginOrRegisterPage> {
   void tooglePage() {
     setState(() {
       showLoginForm = !showLoginForm;
