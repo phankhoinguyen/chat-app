@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_app/services/auth/auth_services.dart';
 import 'package:leo_app/widgets/login_page_widgets/auth_button.dart';
 import 'package:leo_app/widgets/login_page_widgets/my_text_form_field.dart';
 
-class LoginForm extends StatefulWidget {
+class LoginForm extends ConsumerStatefulWidget {
   const LoginForm({super.key, required this.switchPage});
   final void Function() switchPage;
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  ConsumerState<LoginForm> createState() => _LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _LoginFormState extends ConsumerState<LoginForm> {
   String? _eMessage;
   final _auth = AuthServices();
   void logIn() async {

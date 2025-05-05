@@ -1,15 +1,13 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leo_app/services/auth/auth_services.dart';
 import 'package:leo_app/pages/setting_page.dart';
+import 'package:leo_app/services/chat/user_provider.dart';
+import 'package:leo_app/widgets/home_page_widgets/user_avatar.dart';
 
-class DrawerHome extends StatelessWidget {
-  const DrawerHome({super.key, required this.userName, this.profileImage});
-
-  final String userName;
-  final File? profileImage;
+class DrawerHome extends ConsumerWidget {
+  const DrawerHome({super.key, required this.username});
+  final String username;
 
   void logOut() {
     final _auth = AuthServices();
@@ -17,7 +15,7 @@ class DrawerHome extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
 
@@ -31,19 +29,10 @@ class DrawerHome extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      profileImage == null
-                          ? FaIcon(
-                            FontAwesomeIcons.userTie,
-                            size: 40,
-                            color: Theme.of(context).colorScheme.primary,
-                          )
-                          : CircleAvatar(
-                            radius: 30,
-                            backgroundImage: FileImage(profileImage!),
-                          ),
+                      const UserAvatar(),
                       const SizedBox(height: 10),
                       Text(
-                        'Khôi Nguyên',
+                        username!,
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium!.copyWith(

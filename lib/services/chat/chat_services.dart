@@ -4,11 +4,13 @@ final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 // Lấy dữ liệu người dùng
 
-Stream<List<Map<String, dynamic>>> getUser() {
-  return _db.collection('Users').snapshots().map((snapshot) {
-    return snapshot.docs.map((doc) {
-      final user = doc.data();
-      return user;
-    }).toList();
-  });
+class ChatServices {
+  Stream<List<Map<String, dynamic>>> getUser() {
+    return _db.collection('users').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final user = doc.data();
+        return user;
+      }).toList();
+    });
+  }
 }
