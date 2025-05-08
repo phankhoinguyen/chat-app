@@ -17,12 +17,15 @@ class ChatServices {
 
   //Gửi tin nhắn
   Future<void> sendMessages(String senderUsername, receiverId, messages) async {
+    final user =
+        await _db.collection('users').doc(_auth.currentUser!.uid).get();
     Message newMessage = Message(
       _auth.currentUser!.uid,
       senderUsername,
       receiverId,
       messages,
       Timestamp.now(),
+      user.data()!['imageUrl'],
     );
 
     // Tạo chat room id
@@ -47,7 +50,7 @@ class ChatServices {
         .collection('chat_rooms')
         .doc(chatRoomId)
         .collection('message')
-        .orderBy('timestamp', descending: false)
+        .orderBy('timestamp', descending: true)
         .snapshots();
   }
 }

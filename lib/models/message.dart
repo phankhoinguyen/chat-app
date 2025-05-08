@@ -7,8 +7,9 @@ class Message {
     this.receiverId,
     this.message,
     this.timestamp,
+    this.senderImgUrl,
   );
-
+  final String senderImgUrl;
   final String senderId;
   final String senderUsername;
   final String receiverId;
@@ -22,6 +23,7 @@ class Message {
       'receiverId': receiverId,
       'message': message,
       'timestamp': timestamp,
+      'senderImgUrl': senderImgUrl,
     };
   }
 }

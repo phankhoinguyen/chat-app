@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_app/pages/chat_page.dart';
 import 'package:leo_app/services/chat/home_services.dart';
 import 'package:leo_app/services/chat/user_provider.dart';
+import 'package:leo_app/themes/theme_provider.dart';
 import 'package:leo_app/widgets/home_page_widgets/drawer_home.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -17,6 +18,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
+    ref.watch(themeProvider);
     final chatService = ChatServices();
     final currentUser = FirebaseAuth.instance.currentUser;
     final userStream = chatService.getUser();
@@ -58,7 +60,6 @@ class _HomePageState extends ConsumerState<HomePage> {
               final user = users[index];
               return ListTile(
                 onTap: () {
-                  print('username : $username');
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder:
@@ -75,16 +76,21 @@ class _HomePageState extends ConsumerState<HomePage> {
                     user['imageUrl'] == ''
                         ? CircleAvatar(
                           backgroundColor: Colors.grey.shade400,
-                          child: FaIcon(
+                          child: const FaIcon(
                             FontAwesomeIcons.userTie,
                             size: 30,
-                            color: Theme.of(context).colorScheme.primary,
                           ),
                         )
                         : CircleAvatar(
                           backgroundImage: NetworkImage(user['imageUrl']),
                         ),
-                title: Text(user['username']),
+                title: Text(
+                  user['username'],
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontFamily: 'Cedora',
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               );
             },
           );

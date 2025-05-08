@@ -58,10 +58,11 @@ class _UserAvatarState extends ConsumerState<UserAvatar> {
                       backgroundImage: NetworkImage(url!),
                     )
                     : CircleAvatar(
+                      radius: 30,
                       backgroundColor: Colors.grey.shade300,
                       child: FaIcon(
                         FontAwesomeIcons.userTie,
-                        size: 30,
+
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
