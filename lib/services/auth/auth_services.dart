@@ -32,6 +32,7 @@ class AuthServices {
         password: pass,
       );
       _db.collection('users').doc(user.user!.uid).set({
+        'uid': user.user!.uid,
         'imageUrl': '',
         'username': username,
         'email': email,

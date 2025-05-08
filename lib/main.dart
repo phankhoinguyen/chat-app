@@ -1,12 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leo_app/pages/auth_gate.dart';
 import 'package:leo_app/firebase_options.dart';
 import 'package:leo_app/themes/light_mode.dart';
 
+late Size mq;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Đảm bảo các widgets được khởi tạo trước
+
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.surface),
+  );
   await Firebase.initializeApp(
     // Khởi tạo Firebase với cấu hình đã tạo
     options:

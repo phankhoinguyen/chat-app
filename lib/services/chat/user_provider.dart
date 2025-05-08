@@ -18,6 +18,11 @@ final usernameProvider = FutureProvider<String?>((ref) async {
 
   final doc =
       await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+  final username = doc.data()?['username'] as String?;
+  ref.read(usernameLocalProvider.notifier).state = username!;
+  return username;
+});
 
-  return doc.data()?['username'] as String?;
+final usernameLocalProvider = StateProvider<String>((ref) {
+  return 'Loading...';
 });

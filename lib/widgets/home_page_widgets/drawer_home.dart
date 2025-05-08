@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leo_app/services/auth/auth_services.dart';
 import 'package:leo_app/pages/setting_page.dart';
-import 'package:leo_app/services/chat/user_provider.dart';
 import 'package:leo_app/widgets/home_page_widgets/user_avatar.dart';
 
 class DrawerHome extends ConsumerWidget {
@@ -32,7 +31,7 @@ class DrawerHome extends ConsumerWidget {
                       const UserAvatar(),
                       const SizedBox(height: 10),
                       Text(
-                        username!,
+                        username,
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium!.copyWith(

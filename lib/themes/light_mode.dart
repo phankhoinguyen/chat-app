@@ -19,6 +19,7 @@ final colorScheme = ColorScheme.fromSeed(
 final lightMode = ThemeData.light().copyWith(
   dividerTheme: DividerThemeData(color: colorScheme.background),
   scaffoldBackgroundColor: colorScheme.surface,
+
   appBarTheme: AppBarTheme(
     backgroundColor: colorScheme.surface,
     centerTitle: true,
