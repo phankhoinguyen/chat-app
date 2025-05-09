@@ -44,6 +44,7 @@ dependencies:
   firebase_storage: ^12.4.5
   flutter_keyboard_visibility: ^6.0.0
   firebase_messaging: ^15.2.5
+  http: ^1.4.0
 
 dev_dependencies:
   flutter_test:

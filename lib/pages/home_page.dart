@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_app/pages/chat_page.dart';
 import 'package:leo_app/services/chat/home_services.dart';
 import 'package:leo_app/services/chat/user_provider.dart';
+import 'package:leo_app/services/push_notification/notification_service.dart';
 import 'package:leo_app/themes/theme_provider.dart';
 import 'package:leo_app/widgets/home_page_widgets/drawer_home.dart';
 
@@ -19,13 +20,14 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     ref.watch(themeProvider);
+    final notiService = NotificationService();
     final chatService = ChatServices();
     final currentUser = FirebaseAuth.instance.currentUser;
     final userStream = chatService.getUser();
     final getUsername = ref.watch(usernameProvider);
     final username = ref.watch(usernameLocalProvider);
     print('username : $username');
-
+    notiService.getToken();
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text('Messenger')),
       drawer: DrawerHome(
