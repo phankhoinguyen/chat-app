@@ -1,16 +1,48 @@
-# leo_app
 
-A new Flutter project.
+# 🗨️ Leo Chat App 
+A full-featured real-time chat application built with Flutter and Firebase, supporting both private and group messaging. Designed with a clean MVVM architecture and powered by Riverpod for scalable state management. The app integrates push notifications via Firebase Cloud Messaging, with a custom Node.js + Express.js backend to trigger notifications through RESTful APIs.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Frontend:** Flutter (Dart), Riverpod, MVVM
+
+**Backend:** Node.js, Express.js, Firebase Cloud Messaging
+
+**Database:** Firebase Firestore
+**Storage:** Firebase Storage
+**Authentication:** Firebase Auth
+
+
+## App UI
+
+#### Login Screen
+![App Screenshot](
+   assets_readme/Login.png
+)
+#### Register Screen
+![App Screenshot](
+   assets_readme/Register.png
+)
+#### Home Screen
+![App Screenshot](
+   assets_readme/Home.png
+)
+#### Settings Screen
+![App Screenshot](
+   assets_readme/Settings.png
+)
+#### Drawer Screen
+![App Screenshot](
+   assets_readme/Drawer.png
+)
+#### Chat Screen
+![App Screenshot](
+   assets_readme/Chat.png
+)
+#### DarkTheme Screen
+![App Screenshot](
+   assets_readme/Dark.png
+)
