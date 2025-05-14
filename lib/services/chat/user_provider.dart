@@ -26,3 +26,7 @@ final usernameProvider = FutureProvider<String?>((ref) async {
 final usernameLocalProvider = StateProvider<String>((ref) {
   return 'Loading...';
 });
+
+final isUploadingImg = StateProvider<bool>((ref) {
+  return false;
+});

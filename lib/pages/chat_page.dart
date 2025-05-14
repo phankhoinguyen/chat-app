@@ -1,6 +1,13 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:leo_app/models/message.dart';
+import 'package:leo_app/services/chat/user_provider.dart';
 import 'package:leo_app/widgets/chat_page/message_list_page.dart';
 import 'package:leo_app/services/chat/home_services.dart';
 import 'package:leo_app/widgets/chat_page/messages_input.dart';
@@ -34,10 +41,59 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         widget.senderUsername,
         widget.receiverId,
         messageInput.text,
+        TypeMess.text,
       );
       messageInput.clear();
     }
     scrollDown();
+  }
+
+  void takePic() async {
+    final pickedImg = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+      maxWidth: 150,
+    );
+    if (pickedImg == null) return;
+    final imgFile = File(pickedImg.path);
+    final storageRef = FirebaseStorage.instance
+        .ref()
+        .child('chat_images')
+        .child('${widget.senderUsername}.jpg');
+    ref.read(isUploadingImg.notifier).state = true;
+    await storageRef.putFile(imgFile);
+    final imgUrl = await storageRef.getDownloadURL();
+    await service.sendMessages(
+      widget.senderUsername,
+      widget.receiverId,
+      imgUrl,
+      TypeMess.img,
+    );
+    ref.read(isUploadingImg.notifier).state = false;
+  }
+
+  void takeMultiPic() async {
+    final pickedImg = await ImagePicker().pickMultiImage(
+      imageQuality: 50,
+      maxWidth: 350,
+    );
+    for (var i in pickedImg) {
+      final imgFile = File(i.path);
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('chat_images')
+          .child('${widget.senderUsername + Timestamp.now().toString()}.jpg');
+      ref.read(isUploadingImg.notifier).state = true;
+      await storageRef.putFile(imgFile);
+      final imgUrl = await storageRef.getDownloadURL();
+      await service.sendMessages(
+        widget.senderUsername,
+        widget.receiverId,
+        imgUrl,
+        TypeMess.img,
+      );
+      ref.read(isUploadingImg.notifier).state = false;
+    }
   }
 
   void scrollDown() {
@@ -64,6 +120,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isUploading = ref.watch(isUploadingImg);
+    print(isUploading);
     return GestureDetector(
       onTap: () {
         if (_focusNode.hasFocus) {
@@ -102,11 +160,21 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               ),
             ),
             // Messages Input
+            if (isUploading)
+              const Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             SafeArea(
               child: MessagesInput(
                 messageInput: messageInput,
-                ontap: sendMessages,
+                sendTextMessages: sendMessages,
                 focusNode: _focusNode,
+                sendImgMessages: takePic,
+                sendMultiImgMessages: takeMultiPic,
               ),
             ),
           ],

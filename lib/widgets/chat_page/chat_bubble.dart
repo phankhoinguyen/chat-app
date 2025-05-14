@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:leo_app/models/message.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble.first({
@@ -7,11 +9,13 @@ class ChatBubble extends StatelessWidget {
     required this.message,
     required this.isUser,
     required this.imgUrl,
+    required this.type,
   }) : isFirstInSequence = true;
   const ChatBubble.next({
     super.key,
     required this.message,
     required this.isUser,
+    required this.type,
   }) : isFirstInSequence = true,
        imgUrl = null;
 
@@ -20,6 +24,7 @@ class ChatBubble extends StatelessWidget {
 
   final String? imgUrl;
   final bool isFirstInSequence;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +57,19 @@ class ChatBubble extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 20,
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.65,
-                  ),
+                  padding:
+                      type == TypeMess.text.name
+                          ? const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 20,
+                          )
+                          : null,
+                  constraints:
+                      type == TypeMess.text.name
+                          ? BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.65,
+                          )
+                          : const BoxConstraints(maxWidth: 300),
                   margin: const EdgeInsets.only(bottom: 10),
 
                   decoration: BoxDecoration(
@@ -68,12 +79,34 @@ class ChatBubble extends StatelessWidget {
                             ? Theme.of(context).colorScheme.secondary
                             : Colors.grey.shade400,
                   ),
-                  child: Text(
-                    message,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: isUser ? Colors.white : Colors.black,
-                    ),
-                  ),
+                  child:
+                      type == TypeMess.text.name
+                          ? Text(
+                            message,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge!.copyWith(
+                              color: isUser ? Colors.white : Colors.black,
+                            ),
+                          )
+                          : ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CachedNetworkImage(
+                              imageUrl: message,
+                              fit: BoxFit.cover,
+                              placeholder:
+                                  (context, url) => const SizedBox(
+                                    width: 100,
+                                    height: 100,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  ),
+                              errorWidget:
+                                  (context, url, error) =>
+                                      const Icon(Icons.error),
+                            ),
+                          ),
                 ),
               ],
             ),

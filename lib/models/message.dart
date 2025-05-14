@@ -8,6 +8,7 @@ class Message {
     this.message,
     this.timestamp,
     this.senderImgUrl,
+    this.type,
   );
   final String senderImgUrl;
   final String senderId;
@@ -15,6 +16,7 @@ class Message {
   final String receiverId;
   final String message;
   final Timestamp timestamp;
+  final TypeMess type;
 
   Map<String, dynamic> toMap() {
     return {
@@ -24,6 +26,9 @@ class Message {
       'message': message,
       'timestamp': timestamp,
       'senderImgUrl': senderImgUrl,
+      'type': type.name,
     };
   }
 }
+
+enum TypeMess { text, img }

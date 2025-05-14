@@ -21,7 +21,12 @@ class ChatServices {
   }
 
   //Gửi tin nhắn
-  Future<void> sendMessages(String senderUsername, receiverId, messages) async {
+  Future<void> sendMessages(
+    String senderUsername,
+    receiverId,
+    messages,
+    TypeMess type,
+  ) async {
     final user =
         await _db.collection('users').doc(_auth.currentUser!.uid).get();
     final receiverUser = await _db.collection('users').doc(receiverId).get();
@@ -34,6 +39,7 @@ class ChatServices {
       messages,
       Timestamp.now(),
       user.data()!['imageUrl'],
+      type,
     );
 
     // Tạo chat room id

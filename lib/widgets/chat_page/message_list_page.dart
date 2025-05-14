@@ -38,6 +38,7 @@ class _MessageListPageState extends State<MessageListPage> {
           controller: widget.controller,
           itemCount: listMess.length,
           itemBuilder: (context, index) {
+            print('Check auth :  ${_auth.currentUser}');
             bool isUser = listMess[index]['senderId'] == _auth.currentUser!.uid;
             // final nextMess =
             //     index + 1 < listMess.length ? listMess[index + 1] : null;
@@ -49,13 +50,16 @@ class _MessageListPageState extends State<MessageListPage> {
             final prevSenderId = prevMess != null ? prevMess['senderId'] : null;
             final isSameUserAsPrev =
                 prevSenderId == listMess[index]['senderId'];
+
             return !isSameUserAsPrev && !isUser
                 ? ChatBubble.first(
+                  type: listMess[index]['type'],
                   message: listMess[index]['message'],
                   isUser: isUser,
                   imgUrl: listMess[index]['senderImgUrl'],
                 )
                 : ChatBubble.next(
+                  type: listMess[index]['type'],
                   message: listMess[index]['message'],
                   isUser: isUser,
                 );
