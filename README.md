@@ -16,33 +16,34 @@ A full-featured real-time chat application built with Flutter and Firebase, supp
 **Authentication:** Firebase Auth
 
 
-## App UI
+## 📱 App UI Screenshots
 
-#### Login Screen
-![App Screenshot](
-   assets_readme/Login.png
-)
-#### Register Screen
-![App Screenshot](
-   assets_readme/Register.png
-)
-#### Home Screen
-![App Screenshot](
-   assets_readme/Home.png
-)
-#### Settings Screen
-![App Screenshot](
-   assets_readme/Settings.png
-)
-#### Drawer Screen
-![App Screenshot](
-   assets_readme/Drawer.png
-)
-#### Chat Screen
-![App Screenshot](
-   assets_readme/Chat.png
-)
-#### DarkTheme Screen
-![App Screenshot](
-   assets_readme/Dark.png
-)
+### 🔐 Authentication
+
+| Login | Register |
+|-------|----------|
+| ![Login](assets_readme/Login.png) | ![Register](assets_readme/Register.png) |
+
+---
+
+### 🏠 Main Interface
+
+| Home | Chat | Drawer |
+|------|------|--------|
+| ![Home](assets_readme/Home.png) | ![Chat](assets_readme/Chat.png) | ![Drawer](assets_readme/Drawer.png) |
+
+---
+
+### ⚙️ Settings & Theme
+
+| Settings | Dark Theme |
+|----------|------------|
+| ![Settings](assets_readme/Settings.png) | ![Dark](assets_readme/Dark.png) |
+
+
+
+### 🖼️ Send image, multiple images and emoji
+
+| Settings | Dark Theme |
+|----------|------------|
+| ![Pick](assets_readme/pick_multi_images.png) | ![Send](assets_readme/pickMultiImg_emoji_chat.png) |
