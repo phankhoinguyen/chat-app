@@ -26,10 +26,18 @@ class _MessageListPageState extends State<MessageListPage> {
       stream: chatService.getMessage(_auth.currentUser!.uid, widget.senderId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           return const Text('Something went wrong!!!');
+        }
+        if (snapshot.data!.docs.isEmpty) {
+          return Center(
+            child: Text(
+              'Hãy bắt đầu cuộc trò chuyện 💬',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          );
         }
 
         final listMess = snapshot.data!.docs;

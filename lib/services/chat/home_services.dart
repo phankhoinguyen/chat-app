@@ -76,4 +76,22 @@ class ChatServices {
         .orderBy('timestamp', descending: true)
         .snapshots();
   }
+
+  Stream<QuerySnapshot> getLastMessage(
+    Map<String, dynamic> user,
+    String chatId,
+  ) {
+    return _db
+        .collection('chat_rooms')
+        .doc(chatId)
+        .collection('message')
+        .orderBy('timestamp', descending: true)
+        .limit(1)
+        .snapshots();
+  }
+
+  String getChatId(String uid1, String uid2) {
+    final ids = [uid1, uid2]..sort();
+    return ids.join('_');
+  }
 }

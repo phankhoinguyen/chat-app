@@ -121,7 +121,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final isUploading = ref.watch(isUploadingImg);
-    print(isUploading);
     return GestureDetector(
       onTap: () {
         if (_focusNode.hasFocus) {
