@@ -33,7 +33,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final themeMode = ref.watch(themeProvider);
-    print('Build');
     bool isDark = themeMode == ThemeMode.dark;
     final systemStyle = SystemUiOverlayStyle(
       systemNavigationBarColor:

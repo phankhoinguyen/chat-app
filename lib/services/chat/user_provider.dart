@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:leo_app/services/auth/auth_provider.dart';
 
 final avatarImgProvider = FutureProvider<String?>((ref) async {
-  final user = FirebaseAuth.instance.currentUser;
+  final user = ref.watch(authStateProvider).value;
   if (user == null) return null;
 
   final doc =
@@ -13,8 +13,9 @@ final avatarImgProvider = FutureProvider<String?>((ref) async {
 });
 
 final usernameProvider = FutureProvider<String?>((ref) async {
-  final user = FirebaseAuth.instance.currentUser;
+  final user = ref.watch(authStateProvider).value;
   if (user == null) return null;
+  print('Provider : ${user.email}');
 
   final doc =
       await FirebaseFirestore.instance.collection('users').doc(user.uid).get();

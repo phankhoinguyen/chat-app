@@ -27,7 +27,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final userStream = chatService.getUser();
     final getUsername = ref.watch(usernameProvider);
     final username = ref.watch(usernameLocalProvider);
-    print('username : $username');
+
     notiService.getToken();
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text('Messenger')),
@@ -73,7 +73,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                   if (messageSnapshot.hasData &&
                       messageSnapshot.data!.docs.isNotEmpty) {
                     final query = messageSnapshot.data!.docs.first;
-                    print('{ query : $query}');
                     lastMessage = Message(
                       query['senderId'],
                       query['senderUsername'],

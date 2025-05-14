@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_app/services/auth/auth_services.dart';
+import 'package:leo_app/services/chat/user_provider.dart';
 import 'package:leo_app/widgets/login_page_widgets/auth_button.dart';
 import 'package:leo_app/widgets/login_page_widgets/my_text_form_field.dart';
 
@@ -19,6 +20,8 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
   void signUp() async {
     if (_formKey.currentState!.validate()) {
       try {
+        ref.read(usernameProvider);
+        ref.read(avatarImgProvider);
         await _auth.signUp(_email.text, _password.text, _username.text);
       } catch (e) {
         setState(() {
